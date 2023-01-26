@@ -1,3 +1,5 @@
 project-env/*
 src/datasets/startup_investments/*
 __pycache__
+
+.env
