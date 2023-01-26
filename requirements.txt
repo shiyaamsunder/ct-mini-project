@@ -4,6 +4,7 @@ argon2-cffi-bindings==21.2.0
 arrow==1.2.3
 asttokens==2.2.1
 attrs==22.2.0
+autopep8==2.0.1
 Babel==2.11.0
 backcall==0.2.0
 beautifulsoup4==4.11.1
@@ -54,6 +55,7 @@ MarkupSafe==2.1.1
 matplotlib==3.6.3
 matplotlib-inline==0.1.6
 mistune==2.0.4
+motor==3.1.1
 nbclassic==0.4.8
 nbclient==0.7.2
 nbconvert==7.2.8
@@ -73,6 +75,7 @@ prometheus-client==0.15.0
 prompt-toolkit==3.0.36
 psutil==5.9.4
 pure-eval==0.2.2
+pycodestyle==2.10.0
 pycparser==2.21
 pydantic==1.10.4
 Pygments==2.14.0
