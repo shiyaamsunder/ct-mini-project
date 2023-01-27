@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.encoders import jsonable_encoder
 import pandas as pd
+import pprint
 
 from pydantic import BaseModel
 
@@ -20,15 +21,10 @@ class PredictionFeatures(BaseModel):
 
 app = FastAPI()
 
-origins = [
-    "http://localhost",
-    "http://localhost:5173",
-    "http://localhost:3000",
-]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -66,6 +62,12 @@ async def predict(features: PredictionFeatures):
     return models[0]
 
 
-@app.post("/query")
+@app.get("/query")
 async def query():
+    cursor = fundsdb["stp_fund_final"].find(
+        {"amount_in_usd": {"$lt": 7000000}}).sort('amount_in_usd')
+    for document in await cursor.to_list(length=100):
+        pprint.pprint(document)
+
+    # 
     return {"query": "query"}
