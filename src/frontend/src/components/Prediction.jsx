@@ -10,7 +10,6 @@ const Prediction = () => {
   const [predictionResults, setPredictionResults] = useState(null)
   const [features, setFeatures] = useState({
     funding_round_type: "series a",
-    status: "operating",
     category_code: "web",
     region: "SF Bay"
   })
@@ -51,7 +50,6 @@ const Prediction = () => {
       <div>
 
         <ComboBox label="Funding Round" name="funding_round_type" list={featuresFromDB.funding_round_type} setFeature={setFeatures} />
-        <ComboBox label="Status" name="status" list={featuresFromDB.status} setFeature={setFeatures} />
         <ComboBox label="Category" name="category_code" list={featuresFromDB.category_code} setFeature={setFeatures} />
         <ComboBox label="Region" name="region" list={featuresFromDB.region} setFeature={setFeatures} />
 

@@ -31,13 +31,13 @@ def read_root():
 @app.get("/getfeatures")
 def get_features():
     df = pd.read_csv("../datasets/startup_investments.csv")
-    features = ["funding_round_type", "status", "category_code", "region"]
+    features = ["funding_round_type", "category_code", "region"]
     df = df.fillna('')
     df = df[features]
     data = {}
     for feature in features:
         data[feature] = list(df[feature].unique())
-    print(data)
+    # print(data)
     return data
 
 
