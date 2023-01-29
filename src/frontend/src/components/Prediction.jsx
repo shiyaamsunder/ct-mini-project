@@ -9,10 +9,10 @@ const Prediction = () => {
   const [featuresFromDB, setFeaturesFromDB] = useState(null)
   const [predictionResults, setPredictionResults] = useState(null)
   const [features, setFeatures] = useState({
-    location: "Bangalore",
-    vertical: "E-Commerce",
-    subvertical: "Online-Shopping",
-    investment_type: "Series A"
+    funding_round_type: "series a",
+    status: "operating",
+    category_code: "web",
+    region: "SF Bay"
   })
 
   useEffect(() => {
@@ -50,10 +50,10 @@ const Prediction = () => {
 
       <div>
 
-        <ComboBox label="Location" name="location" list={featuresFromDB.locations} setFeature={setFeatures} />
-        <ComboBox label="Vertical" name="vertical" list={featuresFromDB.vertical} setFeature={setFeatures} />
-        <ComboBox label="Sub Vertical" name="sub_vertical" list={featuresFromDB.subvertical} setFeature={setFeatures} />
-        <ComboBox label="Investment Type" name="invest_type" list={featuresFromDB.investment_type} setFeature={setFeatures} />
+        <ComboBox label="Funding Round" name="funding_round_type" list={featuresFromDB.funding_round_type} setFeature={setFeatures} />
+        <ComboBox label="Status" name="status" list={featuresFromDB.status} setFeature={setFeatures} />
+        <ComboBox label="Category" name="category_code" list={featuresFromDB.category_code} setFeature={setFeatures} />
+        <ComboBox label="Region" name="region" list={featuresFromDB.region} setFeature={setFeatures} />
 
         <div className="mt-4 ml-auto mr-4 w-fit">
           <button className="bg-primary" onClick={handleSubmit}>Predict</button>
@@ -64,10 +64,9 @@ const Prediction = () => {
           <div className="mt-4 h-[100px]">
             <h3 className="font-bold text-lg">Results</h3>
             <p>
-              Predicted Value: $ {parseFloat(predictionResults.amount_in_usd).toFixed(2)}
+              Predicted Value: $ {parseFloat(predictionResults.result).toFixed(2)}
             </p>
             <p>
-            Confidence: {JSON.parse(predictionResults.amount_in_usd_explain).confidence}
             </p>
           </div>
         )

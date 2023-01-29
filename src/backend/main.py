@@ -6,18 +6,10 @@ from fastapi.encoders import jsonable_encoder
 import pandas as pd
 import pprint
 
-from pydantic import BaseModel
 
 
 from db import db, fundsdb
-
-
-class PredictionFeatures(BaseModel):
-    location: str
-    vertical: str
-    subvertical: str
-    investment_type: str
-
+from predict import predict, PredictionFeatures
 
 app = FastAPI()
 
@@ -38,36 +30,19 @@ def read_root():
 
 @app.get("/getfeatures")
 def get_features():
-    df = pd.read_csv("../datasets/dataset_final.csv")
-
-    locations = df.location.unique()
-    vertical = df.vertical.unique()
-    sub_vertical = df.subvertical.unique()
-    invest_type = df.investment_type.unique()
-    data = dict({"locations": list(locations), "vertical": list(
-        vertical), "subvertical": list(sub_vertical), "investment_type": list(invest_type)})
-    # print(sub_vertical)
+    df = pd.read_csv("../datasets/startup_investments.csv")
+    features = ["funding_round_type", "status", "category_code", "region"]
+    df = df.fillna('')
+    df = df[features]
+    data = {}
+    for feature in features:
+        data[feature] = list(df[feature].unique())
+    print(data)
     return data
 
 
 @app.post("/predict")
-async def predict(features: PredictionFeatures):
-
-    print(features)
+async def predict_values(features: PredictionFeatures):
     features = jsonable_encoder(features)
-    models = await db["stp_model_final"].find(features).to_list(10)
-    print(models)
-
-    # return models
-    return models[0]
-
-
-@app.get("/query")
-async def query():
-    cursor = fundsdb["stp_fund_final"].find(
-        {"amount_in_usd": {"$lt": 7000000}}).sort('amount_in_usd')
-    for document in await cursor.to_list(length=100):
-        pprint.pprint(document)
-
-    # 
-    return {"query": "query"}
+    results = predict(features)
+    return {"result": results}
