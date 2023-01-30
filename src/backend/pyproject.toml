@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "backend"
+name = "api"
 version = "0.1.0"
 description = "backend for the ct mini project"
 authors = ["Shiyaam <63956643+shiyaamsunder@users.noreply.github.com>"]
