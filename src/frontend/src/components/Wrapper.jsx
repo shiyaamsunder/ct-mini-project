@@ -1,6 +1,6 @@
 const Wrapper = ({ children }) => {
     return (
-        <div className="w-3/4 min-h-[500px] bg-bg mx-auto mt-24 rounded-md border-[1px] border-zinc-600">
+        <div className="w-full h-[700px] bg-bg mx-auto mt-6 rounded-md border-[1px] border-zinc-600 overflow-y-scroll">
             {children}
         </div>
     )
